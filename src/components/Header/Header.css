@@ -1,0 +1,8 @@
+.p-menubar {
+  background-color: var(--primary-color);
+  border-radius: 0;
+}
+
+.p-menuitem-link span {
+  color: var(--primary-color-text);
+}

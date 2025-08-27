@@ -1,0 +1,13 @@
+.submit-button,
+.reset-button {
+  min-width: 20%;
+  padding: 0 1rem;
+  height: 2.5rem;
+}
+
+.form-actions {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem
+}

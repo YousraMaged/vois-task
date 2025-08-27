@@ -1,0 +1,31 @@
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+
+  .error {
+    margin: 0.5rem 0 1rem 0;
+    color: var(--red-500);
+    font-weight: 500;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+
+  .radio-button {
+    text-align: left;
+    margin-bottom: 0.5rem;
+
+    label {
+      padding: 10px;
+    }
+  }
+
+  label {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  .p-placeholder, .p-multiselect-label , .p-dropdown-label{
+    text-align: left;
+  }
+}
