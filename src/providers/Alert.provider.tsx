@@ -1,6 +1,6 @@
-import React, { createContext, useRef } from 'react';
-import { Toast } from 'primereact/toast';
-import { ToastMessage } from 'primereact/toast';
+import React, { createContext, useRef } from "react";
+import { Toast } from "primereact/toast";
+import { ToastMessage } from "primereact/toast";
 
 type AlertContextType = {
   showSuccess?: (message: string, title?: string) => void;
@@ -10,34 +10,34 @@ type AlertContextType = {
 
 const AlertContext = createContext<AlertContextType>({});
 
-const AlertProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AlertProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const toastRef = useRef<Toast>(null);
 
-  const showSuccess = (message: string, title: string = 'Success') => {
+  const showToast = (
+    message: string,
+    severity: "success" | "error" | "info",
+    title?: string
+  ) => {
     toastRef.current?.show({
-      severity: 'success',
+      severity,
       summary: title,
       detail: message,
       life: 3000,
     } as ToastMessage);
   };
 
-  const showError = (message: string, title: string = 'Error') => {
-    toastRef.current?.show({
-      severity: 'error',
-      summary: title,
-      detail: message,
-      life: 3000,
-    } as ToastMessage);
+  const showSuccess = (message: string, title: string = "Success") => {
+    showToast(message, "success", title);
   };
 
-  const showInfo = (message: string, title: string = 'Info') => {
-    toastRef.current?.show({
-      severity: 'info',
-      summary: title,
-      detail: message,
-      life: 3000,
-    } as ToastMessage);
+  const showError = (message: string, title: string = "Error") => {
+    showToast(message, "error", title);
+  };
+
+  const showInfo = (message: string, title: string = "Info") => {
+    showToast(message, "info", title);
   };
 
   return (

@@ -8,7 +8,6 @@ import {
 import { generateValidationSchema } from "../../helper/generateValidationSchema";
 import { initialInputValues } from "../../constants/initialValues";
 import { useAlert } from "../../hooks/useAlert";
-import { FormEvent } from "react";
 import Field from "../Field/Field";
 import "./Form.css";
 
@@ -22,23 +21,17 @@ const Form = ({ config }: { config: InputConfig[] }) => {
     }, {} as Record<string, InputValue>),
     onSubmit: (values) => {
       console.log(values);
+      showSuccess?.("Answers submitted successfully!", "Success");
+      formik.resetForm();
     },
     validationSchema: schema,
     validateOnChange: true,
     validateOnBlur: true,
   });
   
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    formik.handleSubmit(e);
-    if (formik.isValid) {
-      showSuccess?.("Answers submitted successfully!", "Success");
-      formik.resetForm();
-    }
-  }
-
   return (
 
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={formik.handleSubmit}>
       {config.map((item) => (
         <Fragment key={item.id}>
           <Field
