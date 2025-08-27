@@ -7,10 +7,13 @@ import {
 } from "../../interfaces/inputConfig.interface";
 import { generateValidationSchema } from "../../helper/generateValidationSchema";
 import { initialInputValues } from "../../constants/initialValues";
+import { useAlert } from "../../hooks/useAlert";
+import { FormEvent } from "react";
 import Field from "../Field/Field";
 import "./Form.css";
 
 const Form = ({ config }: { config: InputConfig[] }) => {
+  const { showSuccess } = useAlert();
   const schema = generateValidationSchema(config);
   const formik = useFormik({
     initialValues: config.reduce((acc, field) => {
@@ -24,9 +27,18 @@ const Form = ({ config }: { config: InputConfig[] }) => {
     validateOnChange: true,
     validateOnBlur: true,
   });
+  
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    formik.handleSubmit(e);
+    if (formik.isValid) {
+      showSuccess?.("Answers submitted successfully!", "Success");
+      formik.resetForm();
+    }
+  }
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+
+    <form onSubmit={(e) => handleSubmit(e)}>
       {config.map((item) => (
         <Fragment key={item.id}>
           <Field
@@ -54,7 +66,6 @@ const Form = ({ config }: { config: InputConfig[] }) => {
           disabled={!formik.isValid || formik.isSubmitting}
           label="Submit"
           type="submit"
-          onClick={() => formik.handleSubmit()}
         />
       </div>
     </form>
