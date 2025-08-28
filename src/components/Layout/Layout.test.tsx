@@ -2,10 +2,10 @@ import { describe, it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
 import Layout from "./Layout";
 
-// Mock Header and Outlet components
 vi.mock("../Header/Header", () => ({
   default: () => <header data-testid="header">Header</header>,
 }));
+
 vi.mock("react-router-dom", () => ({
   Outlet: () => <div data-testid="outlet">Outlet</div>,
 }));
